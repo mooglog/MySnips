@@ -74,6 +74,7 @@ def main():
         thing.flip_polarity()
 
 
-main()
+if __name__ == '__main__':
+    main()
 
 
