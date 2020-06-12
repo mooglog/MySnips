@@ -6,7 +6,7 @@ import random
 
 def announce(method):
     @wraps(method)
-    def wrapper(instance, *args, **kwargs):
+    def wrapper(instance, *args, **kwargs) -> object:
         print(f'Running {method.__name__}, {method.__doc__}')
         method(instance, *args, **kwargs)
     return wrapper
@@ -14,7 +14,7 @@ def announce(method):
 
 def security(method):
     @wraps(method)
-    def wrapper(instance, *args, **kwargs):
+    def wrapper(instance, *args, **kwargs) -> object:
         instance.audit_tick()
         if instance.audit > 10:
             print(f'Sorry you have modified the Thing toooo many times! Times: {instance.audit}')
@@ -47,7 +47,7 @@ class Thing:
 
     @security
     @announce
-    def bigger(self, *args):
+    def bigger(self, *args) -> int:
         """This makes a thing bigger!"""
         _old_size = self.size
         self.size = args[0]
@@ -57,7 +57,7 @@ class Thing:
 
     @security
     @announce
-    def flip_polarity(self):
+    def flip_polarity(self) -> bool:
         """This will reverse the current polarity, either true or false, whichever is opposite."""
         _old = self.polarity
         self.polarity = not self.polarity
