@@ -77,11 +77,11 @@ class User(object):
         return self.mfa_enabled
 
 
-<<<<<<< Updated upstream
 def csv_out(data, arg, environment):
     df = pd.DataFrame()
     for i in data:
         df = df.append(i.dict(), ignore_index=True)
+
 
 def output_router(*output):
     pass

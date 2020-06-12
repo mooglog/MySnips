@@ -66,9 +66,20 @@ class Thing:
         return self.polarity
 
 
+class DerivedThing(Thing):
+    """Lets modify the class by adding some additional attrs, and perhaps a method, using inheritance but also make
+    sure that the original class supports the methods we expect it to."""
+    state: dict
+
+    def __init_subclass__(cls, **kwargs):
+
+        return super().__init__()
+
+
 def main():
     from random import randint as rando
     thing = Thing(name='test', size=10, polarity=True)
+    other_thing = DerivedThing()
     for i in range(12):
         thing.bigger(rando(1, 100))
         thing.flip_polarity()
