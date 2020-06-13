@@ -127,17 +127,16 @@ def main():
         {'name': f'Thing {rando(1,90)}',
          'size': 10,
          'polarity': True,
-         'x': rando(1, 5),
-         'y': rando(1, 5),
-         'z': rando(1, 5)}
-        for i in range(10)
+         'x': rando(1, 69),
+         'y': rando(1, 69),
+         'z': rando(1, 69)}
+        for i in range(169)
     ]
     print(f'Now we instantiate all these random things we just made.')
 
     things = [Thing(**i) for i in some_things]
 
-    for i in things:
-        print(i.json())
+    print(f'There are {len(things)} Things')
 
 
 if __name__ == '__main__':
