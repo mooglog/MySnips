@@ -2,6 +2,7 @@
 
 from functools import wraps
 import random
+import json
 
 
 def announce(method):
@@ -80,6 +81,12 @@ class Thing:
             sleep(2.875)
             yield random.random(1, 10000000000)
 
+    def dict(self):
+        return vars(self)
+
+    def json(self):
+        return json.dumps(vars(self))
+
 
 class DerivedThing(Thing):
     """
@@ -104,6 +111,8 @@ def main():
     thing.bigger(rando(1, 100))
     thing.flip_polarity()
     thing.bigger(20, exponential=True)
+    print(thing.dict())
+    print(thing.json())
 
 
 if __name__ == '__main__':
