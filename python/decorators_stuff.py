@@ -52,6 +52,12 @@ class Thing:
     def __repr__(self):
         return f'Thing({self.name}, {self.size}, {self.polarity})'
 
+    def __add__(self, other):
+        pass  # TODO
+
+    def polynomial(self):
+        pass
+
     @classmethod
     def audit_tick(cls):
         cls.audit += 1
