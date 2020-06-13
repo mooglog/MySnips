@@ -1,4 +1,4 @@
-"""Random decorator experiments"""
+"""Random object model and decorator experiments"""
 
 from functools import wraps
 import random
@@ -6,6 +6,7 @@ import json
 
 
 def announce(method):
+    """Decorates methods, and prints the name of the method currently running."""
     @wraps(method)
     def wrapper(instance, *args, **kwargs) -> object:
         print(f'Running {method.__name__}, {method.__doc__}')
@@ -17,12 +18,14 @@ def announce(method):
     return wrapper
 
 
-def security(method):
+def limiter(method):
+    """Will only allow decorated methods to run x number of times"""
     @wraps(method)
     def wrapper(instance, *args, **kwargs) -> object:
+        _change_limit = 20
         instance.audit_tick()
-        if instance.audit > 10:
-            print(f'Sorry you have modified the Thing toooo many times! Times: {instance.audit}')
+        if instance.audit > _change_limit:
+            print(f'Sorry you have modified the Thing t00 many times! Times: {instance.audit}')
         else:
             return method(instance, *args, **kwargs)
     return wrapper
@@ -33,6 +36,9 @@ class Thing:
     name: str
     size: int
     polarity: bool
+    x: float
+    y: float
+    z: float
 
     audit = 0
 
@@ -50,10 +56,10 @@ class Thing:
     def audit_tick(cls):
         cls.audit += 1
 
-    @security
+    @limiter
     @announce
     def bigger(self, amount, exponential=False) -> dict:
-        """This makes a thing bigger!"""
+        """This makes a thing bigger, always need one of those"""
         _old_size = self.size
         try:
             assert exponential is False
@@ -63,7 +69,7 @@ class Thing:
         message = f'The {self} has changed in size by {self.size - _old_size}'
         return dict(size=self.size, message=message)
 
-    @security
+    @limiter
     @announce
     def flip_polarity(self) -> dict:
         """This will reverse the current polarity, either true or false, whichever is opposite."""
@@ -72,10 +78,12 @@ class Thing:
         message = f'The polarity was changed from {_old} to {self.polarity}'
         return dict(size=self.polarity, message=message)
 
-
     @announce
     def blocking_calls(self):
-        """Lets say we have to make long costly blocking calls to an api, that we can yield one by one"""
+        """
+        Lets say we have to make long costly blocking calls to an api or a database query that we can yield
+        one by one
+        """
         from time import sleep
         for i in range(10):
             sleep(2.875)
