@@ -114,13 +114,30 @@ class DerivedThing(Thing):
 
 def main():
     from random import randint as rando
-    thing = Thing(name='test', size=10, polarity=True)
+    thing = Thing(name='The Thing', size=10, polarity=True)
     other_thing = DerivedThing()
     thing.bigger(rando(1, 100))
     thing.flip_polarity()
     thing.bigger(20, exponential=True)
+
     print(thing.dict())
     print(thing.json())
+
+    some_things = [  # a simulated API type response
+        {'name': f'Thing {rando(1,90)}',
+         'size': 10,
+         'polarity': True,
+         'x': rando(1, 5),
+         'y': rando(1, 5),
+         'z': rando(1, 5)}
+        for i in range(10)
+    ]
+    print(f'Now we instantiate all these random things we just made.')
+
+    things = [Thing(**i) for i in some_things]
+
+    for i in things:
+        print(i.json())
 
 
 if __name__ == '__main__':
