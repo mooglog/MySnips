@@ -51,10 +51,14 @@ class Thing:
 
     @security
     @announce
-    def bigger(self, *args) -> dict:
+    def bigger(self, amount, exponential=False) -> dict:
         """This makes a thing bigger!"""
         _old_size = self.size
-        self.size = args[0]
+        try:
+            assert exponential is False
+            self.size = amount
+        except AssertionError:
+            self.size = _old_size * amount
         message = f'The {self} has changed in size by {self.size - _old_size}'
         return dict(size=self.size, message=message)
 
