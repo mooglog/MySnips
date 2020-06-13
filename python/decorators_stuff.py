@@ -81,7 +81,6 @@ class Thing:
             yield random.random(1, 10000000000)
 
 
-
 class DerivedThing(Thing):
     """
     Lets modify the class by adding some additional attrs, and perhaps a method, using inheritance but also make
@@ -93,15 +92,18 @@ class DerivedThing(Thing):
 
         return super().__init__()
 
+    def __call__(self, *args, **kwargs):
+
+        return f'Hey, a derived thing, It exists for no reason!'
+
 
 def main():
     from random import randint as rando
     thing = Thing(name='test', size=10, polarity=True)
     other_thing = DerivedThing()
-    for i in range(12):
-        thing.bigger(rando(1, 100))
-        thing.flip_polarity()
-        thing.blocking_calls()
+    thing.bigger(rando(1, 100))
+    thing.flip_polarity()
+    thing.bigger(20, exponential=True)
 
 
 if __name__ == '__main__':
