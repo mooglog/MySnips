@@ -65,7 +65,7 @@ class Thing:
     @limiter
     @announce
     def bigger(self, amount, exponential=False) -> dict:
-        """This makes a thing bigger, always need one of those"""
+        """This makes a thing bigger, one always need one of these"""
         _old_size = self.size
         try:
             assert exponential is False
@@ -78,7 +78,11 @@ class Thing:
     @limiter
     @announce
     def flip_polarity(self) -> dict:
-        """This will reverse the current polarity, either true or false, whichever is opposite."""
+        """
+        This will reverse the current polarity, either true or false, whichever is opposite. In the words of David Byrne
+        "Making Flippy Floppy"
+
+        """
         _old = self.polarity
         self.polarity = not self.polarity
         message = f'The polarity was changed from {_old} to {self.polarity}'
