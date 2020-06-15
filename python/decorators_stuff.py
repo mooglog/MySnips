@@ -50,7 +50,7 @@ class Thing:
                 setattr(self, field, None)
 
     def __repr__(self):
-        return f'Thing({self.name}, {self.size}, {self.polarity})'
+        return f'Thing({self.name}, {self.size}, {self.polarity}, {self.x}, {self.y}, {self.z})'
 
     def __add__(self, other):
         pass  # TODO
@@ -133,19 +133,21 @@ def main():
     print(thing.json())
 
     some_things = [  # a simulated API type response
-        {'name': f'Thing {rando(1,90)}',
+        {'name': f'THEThing {rando(1,90)}',
          'size': 10,
          'polarity': True,
          'x': rando(1, 69),
          'y': rando(1, 69),
          'z': rando(1, 69)}
-        for i in range(1283940393829495039382)
+        for i in range(124)
     ]
     print(f'Now we instantiate all these random things we just made.')
 
     things = [Thing(**i) for i in some_things]  # just throw em in!
 
     print(f'There are {len(things)} Things')
+    for thing in things:
+        print(thing)
 
 
 if __name__ == '__main__':
