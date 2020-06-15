@@ -6,7 +6,7 @@ import json
 
 
 def announce(method):
-    """Decorates methods, and prints the name of the method currently running."""
+    """Decorates methods, and prints the name of the method currently running, and a message if there is one fm the func"""
     @wraps(method)
     def wrapper(instance, *args, **kwargs) -> object:
         print(f'Running {method.__name__}, {method.__doc__}')
@@ -65,7 +65,7 @@ class Thing:
     @limiter
     @announce
     def bigger(self, amount, exponential=False) -> dict:
-        """This makes a thing bigger, one always need one of these"""
+        """This makes a thing bigger, one always needs one of these"""
         _old_size = self.size
         try:
             assert exponential is False
@@ -79,8 +79,7 @@ class Thing:
     @announce
     def flip_polarity(self) -> dict:
         """
-        This will reverse the current polarity, either true or false, whichever is opposite. In the words of David Byrne
-        "Making Flippy Floppy"
+        This will reverse the current polarity, either true or false, whichever is opposite.
 
         """
         _old = self.polarity
@@ -140,11 +139,11 @@ def main():
          'x': rando(1, 69),
          'y': rando(1, 69),
          'z': rando(1, 69)}
-        for i in range(169)
+        for i in range(1283940393829495039382)
     ]
     print(f'Now we instantiate all these random things we just made.')
 
-    things = [Thing(**i) for i in some_things]
+    things = [Thing(**i) for i in some_things]  # just throw em in!
 
     print(f'There are {len(things)} Things')
 
