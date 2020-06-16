@@ -6,7 +6,7 @@ From Raymond Hettingers talk : Dataclasses: The code generator to end all code g
 from dataclasses import dataclass
 
 
-@dataclass
+@dataclass(order=True, frozen=True)  # Options for sorting, ordering (frozen is hashable)
 class Color:
     x: int
     y: float
